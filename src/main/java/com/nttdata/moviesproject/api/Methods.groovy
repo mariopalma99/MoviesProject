@@ -42,6 +42,25 @@ class Methods {
 		}
 	}
 
+	// getMediaInfoByTitle
+	MediaInfo getMediaInfoByTitle(String title, String type) {
+
+		URL url = new URL(Values.OMDB_URL + "t=" + title + "&type=" + type)
+		HttpURLConnection connection = this.getConnection(url)
+		int responseCode = connection.getResponseCode()
+
+		if (responseCode != 200) {
+
+			throw new RuntimeException("HTTP response code: " + responseCode)
+
+		} else {
+
+			InputStream inputStream = new BufferedInputStream(connection.getInputStream())
+			Gson gson = new Gson()
+			return gson.fromJson(new InputStreamReader(inputStream), MediaInfo.class)
+		}
+	}
+	
 	// searchMediaByTitle
 	void searchMediaByTitle(String title, String type) {
 

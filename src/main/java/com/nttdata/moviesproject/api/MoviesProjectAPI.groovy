@@ -1,6 +1,7 @@
 package com.nttdata.moviesproject.api
 
 import com.nttdata.moviesproject.mappers.Values
+import com.nttdata.moviesproject.models.MediaInfo
 
 public class MoviesProjectAPI {
 
@@ -8,6 +9,7 @@ public class MoviesProjectAPI {
 
 		Methods method = new Methods()
 
+		/*
 		// printMediaInfoByTitle (only returns one result)
 		println("Result info:")
 		method.printMediaInfoByTitle(Values.MEDIA_TITLE, Values.MOVIE_TYPE)
@@ -21,8 +23,8 @@ public class MoviesProjectAPI {
 		method.printFullPlotById(Values.MEDIA_ID)
 
 		// writeFile
-		println("\nWriting txt file:")
-		method.writeFile(method.getMediaByTitle(Values.MEDIA_TITLE, Values.MOVIE_TYPE), Values.FILE_PATH)
+		//println("\nWriting txt file:")
+		//method.writeFile(method.getMediaByTitle(Values.MEDIA_TITLE, Values.MOVIE_TYPE), Values.FILE_PATH)
 
 		// printAllEpisodes
 		println("\nAll episodes:")
@@ -30,7 +32,12 @@ public class MoviesProjectAPI {
 		method.printAllEpisodes(Values.SERIES_TITLE, numberOfSeasons)
 
 		// sendToServer
-		method.sendToServer(Values.FILE_PATH, Values.FILE_PATH)
+		//method.sendToServer(Values.FILE_PATH, Values.FILE_PATH)
+		*/
+		
+		
+		MediaInfo mediaInfo = method.getMediaInfoByTitle(Values.MEDIA_TITLE, Values.MOVIE_TYPE)
+		println(mediaInfo.toString())
 
 
 
