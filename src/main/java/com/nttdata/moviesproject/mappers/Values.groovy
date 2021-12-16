@@ -3,6 +3,7 @@ package com.nttdata.moviesproject.mappers
 class Values {
 
 	private static final OMDB_URL = "http://www.omdbapi.com/?apikey=83001810&"
+	private static final LOCALHOST = "http://localhost:8050/?apikey=83001810&"
 	private static final MEDIA_TITLE = "the+dark+knight"
 	private static final SERIES_TITLE = "game+of+thrones"
 	private static final MEDIA_ID = "tt0468569"

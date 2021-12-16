@@ -7,6 +7,14 @@ import org.apache.commons.net.ftp.FTPClient
 
 class Methods {
 
+	private String host
+	
+	
+	public Methods(String host) {
+		super();
+		this.host = host;
+	}
+
 	// getConnection
 	HttpURLConnection getConnection(URL url) {
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection()
@@ -45,7 +53,8 @@ class Methods {
 	// getMediaInfoByTitle
 	MediaInfo getMediaInfoByTitle(String title, String type) {
 
-		URL url = new URL(Values.OMDB_URL + "t=" + title + "&type=" + type)
+		URL url = new URL(host + "t=" + title + "&type=" + type)
+		println(url)
 		HttpURLConnection connection = this.getConnection(url)
 		int responseCode = connection.getResponseCode()
 
