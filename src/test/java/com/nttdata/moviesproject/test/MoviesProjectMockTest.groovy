@@ -13,7 +13,7 @@ public class MoviesProjectMockTest {
 	public void init() {
 		
 		//code...
-		
+		int number = 3
 	}
 	
 	
