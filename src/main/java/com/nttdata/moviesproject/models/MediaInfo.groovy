@@ -15,14 +15,6 @@ public class MediaInfo {
 	private String Awards
 	private int totalSeasons
 
-	@Override
-	public String toString() {
-		return "MediaInfo [Title=" + Title + ", Rated=" + Rated + ", Released=" + Released +
-		", Runtime=" + Runtime + ", Genre=" + Genre + ", Director=" + Director + ", Actors=" +
-		Actors + ", Plot=" + Plot + ", Language=" + Language + ", Country=" + Country +
-		", Awards=" + Awards + ", totalSeasons=" + totalSeasons + "]";
-	}
-	
 	String getTitle() {
 		return Title
 	}
@@ -105,5 +97,13 @@ public class MediaInfo {
 	}
 	void setTotalSeasons(int totalSeasons) {
 		this.totalSeasons = totalSeasons
+	}
+	
+	@Override
+	public String toString() {
+		return "MediaInfo [Title=" + Title + ", Rated=" + Rated + ", Released=" + Released +
+		", Runtime=" + Runtime + ", Genre=" + Genre + ", Director=" + Director + ", Actors=" +
+		Actors + ", Plot=" + Plot + ", Language=" + Language + ", Country=" + Country +
+		", Awards=" + Awards + ", totalSeasons=" + totalSeasons + "]";
 	}
 }
