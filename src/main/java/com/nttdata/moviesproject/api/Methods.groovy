@@ -7,6 +7,14 @@ import org.apache.commons.net.ftp.FTPClient
 
 class Methods {
 
+	private String host
+	
+	// Constructor
+	public Methods(String host) {
+		super();
+		this.host = host;
+	}
+
 	// getConnection
 	HttpURLConnection getConnection(URL url) {
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection()
@@ -18,7 +26,7 @@ class Methods {
 	// printMediaInfoByTitle
 	void printMediaInfoByTitle(String title, String type) {
 
-		URL url = new URL(Values.OMDB_URL + "t=" + title + "&type=" + type)
+		URL url = new URL(host + "t=" + title + "&type=" + type)
 		HttpURLConnection connection = this.getConnection(url)
 		int responseCode = connection.getResponseCode()
 
@@ -45,7 +53,7 @@ class Methods {
 	// getMediaInfoByTitle
 	MediaInfo getMediaInfoByTitle(String title, String type) {
 
-		URL url = new URL(Values.OMDB_URL + "t=" + title + "&type=" + type)
+		URL url = new URL(host + "t=" + title + "&type=" + type)
 		HttpURLConnection connection = this.getConnection(url)
 		int responseCode = connection.getResponseCode()
 
@@ -72,7 +80,7 @@ class Methods {
 
 		while (results < this.getMediaResults(title, type)) {
 
-			URL url = new URL(Values.OMDB_URL + "s=" + title + "&type=" + type + "&page=" + page)
+			URL url = new URL(host + "s=" + title + "&type=" + type + "&page=" + page)
 			page++
 			HttpURLConnection connection = this.getConnection(url)
 			int responseCode = connection.getResponseCode()
@@ -99,7 +107,7 @@ class Methods {
 	// getMediaResults
 	int getMediaResults(String title, String type) {
 
-		URL url = new URL(Values.OMDB_URL + "s=" + title + "&type=" + type)
+		URL url = new URL(host + "s=" + title + "&type=" + type)
 		HttpURLConnection connection = this.getConnection(url)
 		int responseCode = connection.getResponseCode()
 
@@ -120,7 +128,7 @@ class Methods {
 	// printFullPlotById
 	void printFullPlotById(String id) {
 
-		URL url = new URL(Values.OMDB_URL + "i=" + id + "&plot=full")
+		URL url = new URL(host + "i=" + id + "&plot=full")
 		HttpURLConnection connection = this.getConnection(url)
 		int responseCode = connection.getResponseCode()
 
@@ -137,6 +145,26 @@ class Methods {
 			println("Plot: " + mediaInfo.getPlot())
 		}
 	}
+	
+	// getFullPlotById
+	String getFullPlotById(String id) {
+
+		URL url = new URL(host + "i=" + id + "&plot=full")
+		HttpURLConnection connection = this.getConnection(url)
+		int responseCode = connection.getResponseCode()
+
+		if (responseCode != 200) {
+
+			throw new RuntimeException("HTTP response code: " + responseCode)
+
+		} else {
+
+			InputStream inputStream = new BufferedInputStream(connection.getInputStream())
+			Gson gson = new Gson()
+			MediaInfo mediaInfo = gson.fromJson(new InputStreamReader(inputStream), MediaInfo.class)
+			return mediaInfo.getPlot()
+		}
+	}
 
 	// getMediaByTitle
 	List<String> getMediaByTitle(String title, String type) {
@@ -147,7 +175,7 @@ class Methods {
 
 		while (results < this.getMediaResults(title, type)) {
 
-			URL url = new URL(Values.OMDB_URL + "s=" + title + "&type=" + type + "&page=" + page)
+			URL url = new URL(host + "s=" + title + "&type=" + type + "&page=" + page)
 			page++
 			HttpURLConnection connection = this.getConnection(url)
 			int responseCode = connection.getResponseCode()
@@ -184,7 +212,7 @@ class Methods {
 	// getNumberOfSeasons
 	int getNumberOfSeasons(String title) {
 
-		URL url = new URL(Values.OMDB_URL + "t=" + title + "&type=series")
+		URL url = new URL(host + "t=" + title + "&type=series")
 		HttpURLConnection connection = this.getConnection(url)
 		int responseCode = connection.getResponseCode()
 
@@ -206,7 +234,7 @@ class Methods {
 
 		for (int i=1; i<=numberOfSeasons; i++) {
 
-			URL url = new URL(Values.OMDB_URL + "t=" + title + "&type=series&season=" + i)
+			URL url = new URL(host + "t=" + title + "&type=series&season=" + i)
 			HttpURLConnection connection = this.getConnection(url)
 			int responseCode = connection.getResponseCode()
 
